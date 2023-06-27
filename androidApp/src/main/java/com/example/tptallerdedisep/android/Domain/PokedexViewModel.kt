@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tptallerdedisep.PokedexDBRepository
 import com.example.tptallerdedisep.PokedexRepository
 import com.example.tptallerdedisep.PokedexResults
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -30,6 +31,7 @@ class PokedexViewModel() : ViewModel() {
             }.onSuccess {  // el erro esta aca que se va al onFAILURE
                 if (it.isNotEmpty()) {
                     _pokedex.value = it
+
                     throw Exception("**************ViewModel***********")
                 } else {
                     _pokedex.value = emptyList()

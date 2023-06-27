@@ -13,6 +13,7 @@ import kotlinx.serialization.json.Json
 
 class PokedexRepository {
 
+
     val httpClient = HttpClient {
         install(Logging) {
             level = LogLevel.ALL
@@ -38,7 +39,9 @@ class PokedexRepository {
 
     suspend fun getPokedex1(): List<PokedexResults> {
         return pokedexClient.getPokedex().results
+
     }
+
 
     suspend fun getPokedex(): List<PokedexResults> {
         val results = httpClient.get("https://pokeapi.co/api/v2/pokemon/?limit=100")

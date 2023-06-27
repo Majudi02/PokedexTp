@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import coil.compose.AsyncImage
+import com.example.tptallerdedisep.DatabaseDriverFactory
+import com.example.tptallerdedisep.PokedexDBRepository
 import com.example.tptallerdedisep.PokedexResults
 import com.example.tptallerdedisep.android.Domain.PokedexViewModel
 import com.example.tptallerdedisep.android.ImageBuilder
@@ -71,6 +73,8 @@ class MainActivity : ComponentActivity() {
                 //Mostrar error
             } else {
                 items(pokedexResults) { result: PokedexResults ->
+                    val db = PokedexDBRepository(DatabaseDriverFactory(this@MainActivity))
+                    db.insert(result)
                     PokemonCard(pokemon = result)
                 }
             }
