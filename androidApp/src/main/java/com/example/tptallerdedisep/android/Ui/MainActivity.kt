@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import coil.compose.AsyncImage
+import com.example.tptallerdedisep.DatabaseDriverFactory
+import com.example.tptallerdedisep.PokedexDBRepository
 import com.example.tptallerdedisep.PokedexResults
 import com.example.tptallerdedisep.android.Domain.PokedexViewModel
 import com.example.tptallerdedisep.android.ImageBuilder
@@ -64,12 +66,17 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun PokedexScreen() {
         // Listen to Retrofit response
+        val pokedexDBRepository = PokedexDBRepository(DatabaseDriverFactory(this@MainActivity))
         val pokedexResults by viewModel.pokedex.collectAsState()
 
         LazyColumn {
             if (pokedexResults.isEmpty()) {
-                //Mostrar error
+                val resultsFromDb = pokedexDBRepository.get()
+                items(resultsFromDb) { result: PokedexResults ->
+                    PokemonCard(pokemon = result)
+                }
             } else {
+                pokedexDBRepository.populate(pokedexResults)
                 items(pokedexResults) { result: PokedexResults ->
                     PokemonCard(pokemon = result)
                 }

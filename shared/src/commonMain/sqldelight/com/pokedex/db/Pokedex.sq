@@ -1,4 +1,0 @@
-CREATE TABLE Pokedex  (
-    name TEXT NOT NULL PRIMARY KEY,
-    url TEXT NOT NULL
-);
