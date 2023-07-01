@@ -1,0 +1,15 @@
+CREATE TABLE Pokedex (
+    name TEXT NOT NULL,
+    url TEXT NOT NULL
+);
+
+insertPokemon:
+INSERT INTO Pokedex(name, url)
+VALUES(?, ?);
+
+removeAllPokemon:
+DELETE FROM Pokedex;
+
+selectAllPokemon:
+SELECT Pokedex.*
+FROM Pokedex;
