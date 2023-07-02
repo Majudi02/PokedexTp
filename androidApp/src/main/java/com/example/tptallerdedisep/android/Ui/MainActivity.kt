@@ -25,19 +25,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModelProvider
 import coil.compose.AsyncImage
 import com.example.tptallerdedisep.DatabaseDriverFactory
 import com.example.tptallerdedisep.PokedexDBRepository
 import com.example.tptallerdedisep.PokedexResults
-import com.example.tptallerdedisep.android.Domain.PokedexViewModel
 import com.example.tptallerdedisep.android.ImageBuilder
 import com.example.tptallerdedisep.android.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
-   // val viewModel = PokedexViewModel()
-    private val viewModel : PokedexViewModel by viewModels()
 
+    private val viewModel : PokedexViewModel by viewModels()
 
     @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,18 +51,10 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-
- /*   @Composable
-    fun test(){
-        val pokemon =viewModel.nombre.value
-
-        Text(pokemon.toString())
-    } */
+    
 
     @Composable
     fun PokedexScreen() {
-        // Listen to Retrofit response
         val pokedexDBRepository = PokedexDBRepository(DatabaseDriverFactory(this@MainActivity))
         val pokedexResults by viewModel.pokedex.collectAsState()
 
@@ -82,10 +71,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-    @Composable
-     fun vacio() {
-     Text("Lista vacia")
     }
 
     @Composable
@@ -134,39 +119,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    /*
-       @Composable
-       fun Test(){
-           viewModel = ViewModelProvider(this, PokedexViewModelFactory())[PokedexViewModel::class.java]
-           val pokedexResults by viewModel.pokedex.collectAsState()
 
-           LazyColumn(modifier = Modifier.fillMaxSize()) {
-               for(i in 0..pokedexResults.size){
-                   item {
-                       Row(modifier = Modifier.fillMaxWidth()) {
-                           AsyncImage(
-                               model = ImageBuilder.buildPokemonImageByUrl(pokedexResults[i].url),
-                               contentDescription = "fOTO",
-                               modifier = Modifier.size(130.dp, 130.dp)
-                           )
-                           AsyncImage(
-                               model = ImageBuilder.buildPokemonImageByUrl(pokedexResults[i].url),
-                               contentDescription = "fOTO",
-                               modifier = Modifier.size(130.dp, 130.dp)
-                           )
-
-                           AsyncImage(
-                               model = ImageBuilder.buildPokemonImageByUrl(pokedexResults[i].url),
-                               contentDescription = "fOTO",
-                               modifier = Modifier.size(130.dp, 130.dp)
-                           )
-                       }
-                   }
-               }
-           }
-       }
-
-        */
 }
 
 

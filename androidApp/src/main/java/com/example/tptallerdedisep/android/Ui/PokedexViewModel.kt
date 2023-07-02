@@ -1,7 +1,6 @@
-package com.example.tptallerdedisep.android.Domain
+package com.example.tptallerdedisep.android.Ui
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tptallerdedisep.PokedexRepository
@@ -27,17 +26,15 @@ class PokedexViewModel() : ViewModel() {
         viewModelScope.launch(coroutineExceptionHandler) {
             kotlin.runCatching {
                 repositorio.getPokedex1()
-            }.onSuccess {  // el erro esta aca que se va al onFAILURE
+            }.onSuccess {
                 if (it.isNotEmpty()) {
                     _pokedex.value = it
-                    throw Exception("**************ViewModel***********")
                 } else {
                     _pokedex.value = emptyList()
                 }
             }.onFailure {
                 Log.d("PokedexViewModel", "Error retrieving pokedex: ${it.message}")
                 _pokedex.value = emptyList()
-                throw Exception("________ViewModel Lista vacia________")
             }
 
         }

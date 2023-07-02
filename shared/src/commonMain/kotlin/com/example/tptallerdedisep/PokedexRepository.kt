@@ -26,7 +26,6 @@ class PokedexRepository {
             json(
                 Json {
                     ignoreUnknownKeys = true
-             //       coerceInputValues = true
                 }
             )
         }
@@ -43,14 +42,5 @@ class PokedexRepository {
     suspend fun getPokedex(): List<PokedexResults> {
         val results = httpClient.get("https://pokeapi.co/api/v2/pokemon/?limit=100")
         return results.body()
-   /*  val response : HttpResponse = httpClient.get("https://pokeapi.co/api/v2/pokemon/?limit=800")
-        if(response.status.isSuccess()){
-            val responseContent: String = response.bodyAsText()
-            val pokedex:Pokedex = Json.decodeFromString(responseContent)
-            return pokedex.results
-        }else{
-            throw Exception("Error al obtener la lista de objetos de la Pokédex")
-        }
-    */
     }
 }
